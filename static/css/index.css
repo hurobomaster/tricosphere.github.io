@@ -13,7 +13,7 @@ body {
     margin-bottom: 5px;
 }
 
-.dnerf {
+.tricosphere {
   font-variant: small-caps;
 }
 
@@ -34,6 +34,29 @@ body {
 .publication-banner {
   max-height: parent;
 
+}
+
+/* TriCoSphere-specific styles */
+.video-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.video-grid .column {
+  flex: 1 1 45%;
+  min-width: 280px;
+}
+
+.fig-caption {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #555;
+  text-align: center;
+}
+
+.dnerf {
+  font-variant: small-caps;
 }
 
 .publication-banner video {
