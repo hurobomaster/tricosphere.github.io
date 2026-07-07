@@ -1,0 +1,618 @@
+<?xml version="1.0"?>
+<mujoco model="faithful_3f_cspm">
+  <compiler meshdir="stl_file/" angle="degree"/>
+  <option timestep="0.0005" iterations="200" tolerance="1e-8" solver="Newton"/>
+
+  <default>
+    <default class="silicone_tip">
+      <geom type="sphere" size="0.0082" friction="2.0 0.02 0.0001"
+            solref="0.0005 200.0" solimp="0.99 0.995 0.0001"
+            contype="1" conaffinity="1" condim="6" priority="1"/>
+    </default>
+  </default>
+
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="512"/>
+    <texture type="2d" name="groundplane" builtin="checker" rgb1="0.2 0.3 0.4" rgb2="0.1 0.2 0.3" width="100" height="100"/>
+    <material name="groundplane" texture="groundplane" texrepeat="10 10"/>
+    <mesh name="mesh_platform" file="platform.STL"/>
+    <mesh name="mesh_1_1" file="1_1.STL"/>
+    <mesh name="mesh_1_2" file="1_2.STL"/>
+    <mesh name="mesh_2_1" file="2_1.STL"/>
+    <mesh name="mesh_2_2" file="2_2.STL"/>
+    <mesh name="mesh_3_1" file="3_1.STL"/>
+    <mesh name="mesh_3_2" file="3_2.STL"/>
+    <mesh name="mesh_4_1" file="4_1.STL"/>
+    <mesh name="mesh_4_2" file="4_2.STL"/>
+    <mesh name="cspm14_adaptor" file="cspm14_adaptor.STL"/>
+    <mesh name="cspm23_adaptor" file="cspm23_adaptor.STL"/>
+    <mesh name="paralle_short" file="handtip_platform.STL"/>
+    <mesh name="paralle_long" file="paralle_long.STL"/>
+    <mesh name="sensor" file="sensor.STL"/>
+    <mesh name="two_figer_platform" file="two_figer_platform.STL"/>
+    <mesh name="base1" file="base1.STL"/>
+    <mesh name="base2" file="base2.STL"/>
+    <mesh name="hhtac_base" file="hhtac/hhtac_1.STL"/>
+    <mesh name="hhtac_contact" file="hhtac/hhtac_contact.STL"/>
+  </asset>
+
+  <worldbody>
+    <geom name="ground" type="plane" size="0 0 1" pos="0 0 0" quat="1 0 0 0" material="groundplane" condim="1"/>
+    <light directional="true" diffuse=".4 .4 .4" specular="0.1 0.1 0.1" pos="0 0 5.0" dir="0 0 -1" castshadow="false"/>
+    <light directional="true" diffuse=".6 .6 .6" specular="0.2 0.2 0.2" pos="0 0 4" dir="0 0 -1"/>
+    <body name="hand_base" pos="0 0 0.17797187" euler="0 180 0">
+
+    <body name="figer_alpha" pos="0.06105 0.0 0.0" euler="0 0 60">
+      <body name="body_platform_alpha" pos="0.066699 -0.0002 -0.00038509"
+            quat="0.6889820653006324 0.15906563768307502 0.15906622196486023 0.6889845960777189">
+
+        <geom name="geom_platform_alpha" type="mesh" mesh="base1" rgba="0.5 0.5 0.5 1" contype="0" conaffinity="0"/>
+
+        <!-- Chain 1 -->
+        <body name="body_1_1_alpha" pos="0.047 0 0.0305" quat="0.7071067811865462 0.7071067811865488 0.0 0.0">
+          <inertial mass="0.007" pos="-0.005907 0 0.014178"
+                    fullinertia="1.042e-6 1.101e-6 0.225e-6 0 0.294e-6 0"/>
+          <joint name="joint_1_1_alpha" type="hinge" pos="0 0 0" axis="-1 0 0"
+                 limited="true" range="-33 213" damping="100" frictionloss="0.05"/>
+          <geom name="geom_1_1_alpha" type="mesh" mesh="mesh_1_1" friction="10 0 0"
+                rgba="0 0 0.6 1" contype="0" conaffinity="0"/>
+          <geom name="x_1_1_alpha" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+          <geom name="y_1_1_alpha" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+          <geom name="z_1_1_alpha" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+          <body name="body_1_2_alpha" pos="-0.0116672618895781 0 0.0353370093578838"
+                quat="0.8085158559973773 -0.4470520117325275 -0.33489823294780874 -0.18517500634579043">
+            <inertial mass="0.008" pos="-0.008956 -8e-6 0.019449"
+                      fullinertia="0.83e-6 1.693e-6 1e-6 0 0.748e-6 0"/>
+            <joint name="joint_1_2_alpha" type="hinge" pos="0 0 0" axis="1 0 0"
+                   limited="true" range="-60 60" damping="1"/>
+            <geom name="geom_1_2_alpha" type="mesh" mesh="mesh_1_2" rgba="0 1 0 1" contype="0" conaffinity="0"/>
+            <geom name="x_1_2_alpha" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+            <geom name="y_1_2_alpha" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+            <geom name="z_1_2_alpha" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+            <site name="site_1_connect_alpha" pos="-0.03045 0 0.03672" size="0.001" rgba="1 0 0 1"/>
+          </body>
+        </body>
+
+        <!-- Chain 2 -->
+        <body name="body_2_1_alpha" pos="0.01 0 0.0305">
+          <inertial mass="0.005" pos="0.000519 0 0.01114"
+                    fullinertia="0.479e-6 0.574e-6 0.179e-6 0 -0.138e-6 0"/>
+          <joint name="joint_2_1_alpha" type="hinge" pos="0 0 0" axis="1 0 0"
+                 limited="true" range="-120 120" damping="100" frictionloss="0.05"/>
+          <geom name="geom_2_1_alpha" type="mesh" mesh="mesh_2_1" friction="10 0 0"
+                rgba="0 0.8 0.4 1" contype="0" conaffinity="0"/>
+          <geom name="x_2_1_alpha" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+          <geom name="y_2_1_alpha" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+          <geom name="z_2_1_alpha" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+          <body name="body_2_2_alpha" pos="0.013617 0 0.023617"
+                quat="0.8878198148494888 0.10586792529977154 0.36774869771815494 0.2555950979184514">
+            <inertial mass="0.003" pos="3e-6 9.968e-3 -6.271e-3"
+                      fullinertia="0.448e-6 0.321e-6 0.177e-6 0 0 0.153e-6"/>
+            <joint name="joint_2_2_alpha" type="hinge" pos="0 0 0" axis="0 0 1"
+                   limited="true" range="-60 60" damping="1"/>
+            <geom name="x_2_2_alpha" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+            <geom name="y_2_2_alpha" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+            <geom name="z_2_2_alpha" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+            <geom name="geom_2_2_alpha" type="mesh" mesh="mesh_2_2" rgba="1 1 0 1" contype="0" conaffinity="0"/>
+            <site name="site_2_connect_alpha" pos="0 0.01941147952 -0.02307689935" size="0.001" rgba="1 0 0 0.2"/>
+          </body>
+        </body>
+
+        <!-- Chain 3 -->
+        <body name="body_3_1_alpha" pos="-0.010 0 0.0305">
+          <inertial mass="0.005" pos="-0.000256 0 0.01107"
+                    fullinertia="0.448e-6 0.574e-6 0.172e-6 0 0.131e-6 0"/>
+          <joint name="joint_3_1_alpha" type="hinge" pos="0 0 0" axis="1 0 0"
+                 limited="true" range="-120 120" damping="100" frictionloss="0.05"/>
+          <geom name="geom_3_1_alpha" type="mesh" mesh="mesh_3_1" friction="10 0 0"
+                rgba="0 0.8 0.8 1" contype="0" conaffinity="0"/>
+          <geom name="x_3_1_alpha" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+          <geom name="y_3_1_alpha" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+          <geom name="z_3_1_alpha" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+          <body name="body_3_2_alpha" pos="-0.0136170093578839 0 0.0236170093578839"
+                quat="0.8878205535117507 0.10587030883141682 -0.367747314218155 -0.255593535433435">
+            <inertial mass="0.003" pos="0 10.069e-3 -7.195e-3"
+                      fullinertia="0.526e-6 0.34e-6 0.247e-6 0 0 0.236e-6"/>
+            <joint name="joint_3_2_alpha" type="hinge" pos="0 0 0" axis="0 0 1"
+                   limited="true" range="-60 60" damping="1"/>
+            <geom name="x_3_2_alpha" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+            <geom name="y_3_2_alpha" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+            <geom name="z_3_2_alpha" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+            <geom name="geom_3_2_alpha" type="mesh" mesh="mesh_3_2" friction="0.5 0 0" rgba="0.4 0.8 0.4 1" contype="0" conaffinity="0"/>
+            <site name="site_3_connect_alpha" pos="0 0.0194108877 -0.02307493063" size="0.001" rgba="1 1 1 0.4"/>
+            <!-- CSPM23 adaptor + paralle_long -->
+            <body name="cspm23_adaptor_alpha" pos="0 0.02206 -0.021667"
+                  quat="0.7664016139459412 -0.46050129008309315 0.2306580916677669 0.38388015411199305">
+              <inertial mass="0.003" pos="0 0 7.02e-3" diaginertia="0.082e-6 0.08e-6 0.062e-6"/>
+              <joint name="cspm23_adaptor_joint_alpha" type="hinge" pos="0 0 0" axis="0 0 1"
+                     limited="true" range="-120 120" damping="10"/>
+              <geom name="geom_cspm23_adaptor_alpha" type="mesh" mesh="cspm23_adaptor" rgba="0.8 0 0 1" contype="0" conaffinity="0"/>
+              <geom name="x_cspm23_adaptor_alpha" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+              <geom name="y_cspm23_adaptor_alpha" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+              <geom name="z_cspm23_adaptor_alpha" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+              <body name="paralle_long_link_alpha" pos="0 0 0.009"
+                    quat="0.707106607039899 0.0004936760326029743 -0.7071066106666457 -0.0004936760326030298">
+                <inertial mass="0.004" pos="-1.12e-3 -41.772e-3 0" diaginertia="3.16e-6 0.017e-6 3.172e-6"/>
+                <joint name="paralle_long_joint_alpha" type="hinge" pos="0 0 0" axis="0 0 1"
+                       limited="true" range="-60 60" damping="1"/>
+                <geom name="geom_paralle_long_alpha" type="mesh" mesh="paralle_long" rgba="1 1 1 1" contype="0" conaffinity="0"/>
+                <geom name="x_paralle_long_alpha" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+                <geom name="y_paralle_long_alpha" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+                <geom name="z_paralle_long_alpha" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+                <site name="site_parallel_long_connect_alpha" pos="0 -0.085 0" size="0.001" rgba="1 0.6 1 0.4"/>
+                <site name="site_parallel_long_connect_2_alpha" pos="0 -0.040 0" size="0.002" rgba="1 0.6 0 0.4"/>
+              </body>
+            </body>
+          </body>
+        </body>
+
+        <!-- Chain 4 -->
+        <body name="body_4_1_alpha" pos="-0.047 0 0.0305" quat="0.7071067811865462 0.7071067811865488 0.0 0.0">
+          <inertial mass="0.007" pos="0.005907 0 0.014178"
+                    fullinertia="1.042e-6 1.101e-6 0.225e-6 0 -0.294e-6 0"/>
+          <joint name="joint_4_1_alpha" type="hinge" pos="0 0 0" axis="-1 0 0"
+                 limited="true" range="-33 213" damping="100" frictionloss="0.05"/>
+          <geom name="geom_4_1_alpha" type="mesh" mesh="mesh_4_1" friction="10 0 0" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+          <geom name="x_4_1_alpha" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+          <geom name="y_4_1_alpha" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+          <geom name="z_4_1_alpha" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+          <body name="body_4_2_alpha" pos="0.0116672618895781 0 0.0353370093578838"
+                quat="0.8085158559973775 -0.4470520117325276 0.3348982329478083 0.18517500634579018">
+            <inertial mass="0.021" pos="0.013361 0 42.171e-3"
+                      fullinertia="8.646e-6 10.369e-6 2.697e-6 0 -3.173e-6 0"/>
+            <joint name="joint_4_2_alpha" type="hinge" pos="0 0 0" axis="1 0 0"
+                   limited="true" range="-60 60" damping="1"/>
+            <geom name="geom_4_2_alpha" type="mesh" mesh="mesh_4_2" rgba="1 1 0 1" contype="0" conaffinity="0"/>
+            <geom name="x_4_2_alpha" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+            <geom name="y_4_2_alpha" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+            <geom name="z_4_2_alpha" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+            <!-- CSPM14 adaptor + paralle_short + fingertip -->
+            <body name="cspm14_adaptor_alpha" pos="0.016605179614597 0 0.0627554939638426"
+                  quat="0.9207201443783664 0.07634007027212154 -0.2295613147753419 -0.3061832983122107">
+              <inertial mass="0.002" pos="0 -0.088e-3 4.631e-3" fullinertia="0.104e-6 0.103e-6 0.033e-6 0 0 0.001e-6"/>
+              <joint name="cspm14_adaptor_joint_alpha" type="hinge" pos="0 0 0" axis="0 0 1"
+                     limited="true" range="-120 120" damping="10"/>
+              <geom name="geom_cspm14_adaptor_alpha" type="mesh" mesh="cspm14_adaptor" rgba="1 0 0 1" contype="0" conaffinity="0"/>
+              <geom name="x_cspm14_adaptor_alpha" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+              <geom name="y_cspm14_adaptor_alpha" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+              <geom name="z_cspm14_adaptor_alpha" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+              <body name="paralle_short_link_alpha" pos="0 -0.000128452409223868 0.01421"
+                    quat="0.7071006257529511 -0.0029504338299677357 0.7071006257529511 -0.0029504338299677357">
+                <inertial mass="0.012" pos="0.085e-3 34.705e-3 0" fullinertia="3.562e-6 0.328e-6 3.581e-6 0.014e-6 0 0"/>
+                <joint name="paralle_short_joint_alpha" type="hinge" pos="0 0 0" axis="0 0 1"
+                       limited="true" range="-60 60" damping="1"/>
+                <geom name="geom_paralle_short_alpha" type="mesh" mesh="paralle_short" rgba="0.5 0.3 0.8 1" contype="0" conaffinity="0"/>
+                <geom name="x_paralle_short_alpha" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+                <geom name="y_paralle_short_alpha" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+                <geom name="z_paralle_short_alpha" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+                <site name="site_parallel_short_connect_alpha" pos="0 0.034 0" size="0.001" rgba="1 1 0 0.6"/>
+                <site name="site_parallel_short_connect_2_alpha" pos="0.045 0.034 0" size="0.002" rgba="0.2 0.6 0 1"/>
+                <!-- Fingertip module -->
+                <body name="hhtac_base_alpha" pos="0 0.054 0" quat="1 0 0 0">
+                  <inertial mass="0.033" pos="0.028e-3 24.598e-3 0" diaginertia="6.926e-6 6.598e-6 6.946e-6"/>
+                  <geom name="geom_sensor_alpha" type="mesh" mesh="hhtac_base" rgba="0.6 1 1 1" contype="0" conaffinity="0"/>
+                  <geom name="x_sensor_alpha" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+                  <geom name="y_sensor_alpha" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+                  <geom name="z_sensor_alpha" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+                  <body name="hhtac_contact_alpha" pos="0 42.5e-3 0" quat="1 0 0 0">
+                    <inertial mass="0.013" pos="0 10.164e-3 0" diaginertia="1.157e-6 1.482e-6 1.157e-6"/>
+                    <geom name="hhtac_contact_alpha" type="mesh" mesh="hhtac_contact" contype="0" conaffinity="0"
+                          friction="1.5 0.1 0.005" solimp="0.95 1 0.001" solref="-0.0001 0.99" margin="0.003"
+                          rgba="1 1 1 1"/>
+                  </body>
+                </body>
+              </body>
+            </body>
+            <site name="site_4_connect_alpha" pos="0.03033 0 0.03694" size="0.001" rgba="1 1 1 1"/>
+          </body>
+        </body>
+
+      </body>
+    </body>
+
+    <body name="figer_beta" pos="-0.06105 0.0 0.0" euler="0 0 -60">
+      <body name="body_platform_beta" pos="0.066699 -0.0002 -0.00038509"
+            quat="0.6889820653006324 0.15906563768307502 0.15906622196486023 0.6889845960777189">
+
+        <geom name="geom_platform_beta" type="mesh" mesh="base1" rgba="0.5 0.5 0.5 1" contype="0" conaffinity="0"/>
+
+        <!-- Chain 1 -->
+        <body name="body_1_1_beta" pos="0.047 0 0.0305" quat="0.7071067811865462 0.7071067811865488 0.0 0.0">
+          <inertial mass="0.007" pos="-0.005907 0 0.014178"
+                    fullinertia="1.042e-6 1.101e-6 0.225e-6 0 0.294e-6 0"/>
+          <joint name="joint_1_1_beta" type="hinge" pos="0 0 0" axis="-1 0 0"
+                 limited="true" range="-33 213" damping="100" frictionloss="0.05"/>
+          <geom name="geom_1_1_beta" type="mesh" mesh="mesh_1_1" friction="10 0 0"
+                rgba="0 0 0.6 1" contype="0" conaffinity="0"/>
+          <geom name="x_1_1_beta" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+          <geom name="y_1_1_beta" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+          <geom name="z_1_1_beta" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+          <body name="body_1_2_beta" pos="-0.0116672618895781 0 0.0353370093578838"
+                quat="0.8085158559973773 -0.4470520117325275 -0.33489823294780874 -0.18517500634579043">
+            <inertial mass="0.008" pos="-0.008956 -8e-6 0.019449"
+                      fullinertia="0.83e-6 1.693e-6 1e-6 0 0.748e-6 0"/>
+            <joint name="joint_1_2_beta" type="hinge" pos="0 0 0" axis="1 0 0"
+                   limited="true" range="-60 60" damping="1"/>
+            <geom name="geom_1_2_beta" type="mesh" mesh="mesh_1_2" rgba="0 1 0 1" contype="0" conaffinity="0"/>
+            <geom name="x_1_2_beta" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+            <geom name="y_1_2_beta" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+            <geom name="z_1_2_beta" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+            <site name="site_1_connect_beta" pos="-0.03045 0 0.03672" size="0.001" rgba="1 0 0 1"/>
+          </body>
+        </body>
+
+        <!-- Chain 2 -->
+        <body name="body_2_1_beta" pos="0.01 0 0.0305">
+          <inertial mass="0.005" pos="0.000519 0 0.01114"
+                    fullinertia="0.479e-6 0.574e-6 0.179e-6 0 -0.138e-6 0"/>
+          <joint name="joint_2_1_beta" type="hinge" pos="0 0 0" axis="1 0 0"
+                 limited="true" range="-120 120" damping="100" frictionloss="0.05"/>
+          <geom name="geom_2_1_beta" type="mesh" mesh="mesh_2_1" friction="10 0 0"
+                rgba="0 0.8 0.4 1" contype="0" conaffinity="0"/>
+          <geom name="x_2_1_beta" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+          <geom name="y_2_1_beta" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+          <geom name="z_2_1_beta" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+          <body name="body_2_2_beta" pos="0.013617 0 0.023617"
+                quat="0.8878198148494888 0.10586792529977154 0.36774869771815494 0.2555950979184514">
+            <inertial mass="0.003" pos="3e-6 9.968e-3 -6.271e-3"
+                      fullinertia="0.448e-6 0.321e-6 0.177e-6 0 0 0.153e-6"/>
+            <joint name="joint_2_2_beta" type="hinge" pos="0 0 0" axis="0 0 1"
+                   limited="true" range="-60 60" damping="1"/>
+            <geom name="x_2_2_beta" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+            <geom name="y_2_2_beta" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+            <geom name="z_2_2_beta" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+            <geom name="geom_2_2_beta" type="mesh" mesh="mesh_2_2" rgba="1 1 0 1" contype="0" conaffinity="0"/>
+            <site name="site_2_connect_beta" pos="0 0.01941147952 -0.02307689935" size="0.001" rgba="1 0 0 0.2"/>
+          </body>
+        </body>
+
+        <!-- Chain 3 -->
+        <body name="body_3_1_beta" pos="-0.010 0 0.0305">
+          <inertial mass="0.005" pos="-0.000256 0 0.01107"
+                    fullinertia="0.448e-6 0.574e-6 0.172e-6 0 0.131e-6 0"/>
+          <joint name="joint_3_1_beta" type="hinge" pos="0 0 0" axis="1 0 0"
+                 limited="true" range="-120 120" damping="100" frictionloss="0.05"/>
+          <geom name="geom_3_1_beta" type="mesh" mesh="mesh_3_1" friction="10 0 0"
+                rgba="0 0.8 0.8 1" contype="0" conaffinity="0"/>
+          <geom name="x_3_1_beta" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+          <geom name="y_3_1_beta" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+          <geom name="z_3_1_beta" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+          <body name="body_3_2_beta" pos="-0.0136170093578839 0 0.0236170093578839"
+                quat="0.8878205535117507 0.10587030883141682 -0.367747314218155 -0.255593535433435">
+            <inertial mass="0.003" pos="0 10.069e-3 -7.195e-3"
+                      fullinertia="0.526e-6 0.34e-6 0.247e-6 0 0 0.236e-6"/>
+            <joint name="joint_3_2_beta" type="hinge" pos="0 0 0" axis="0 0 1"
+                   limited="true" range="-60 60" damping="1"/>
+            <geom name="x_3_2_beta" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+            <geom name="y_3_2_beta" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+            <geom name="z_3_2_beta" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+            <geom name="geom_3_2_beta" type="mesh" mesh="mesh_3_2" friction="0.5 0 0" rgba="0.4 0.8 0.4 1" contype="0" conaffinity="0"/>
+            <site name="site_3_connect_beta" pos="0 0.0194108877 -0.02307493063" size="0.001" rgba="1 1 1 0.4"/>
+            <!-- CSPM23 adaptor + paralle_long -->
+            <body name="cspm23_adaptor_beta" pos="0 0.02206 -0.021667"
+                  quat="0.7664016139459412 -0.46050129008309315 0.2306580916677669 0.38388015411199305">
+              <inertial mass="0.003" pos="0 0 7.02e-3" diaginertia="0.082e-6 0.08e-6 0.062e-6"/>
+              <joint name="cspm23_adaptor_joint_beta" type="hinge" pos="0 0 0" axis="0 0 1"
+                     limited="true" range="-120 120" damping="10"/>
+              <geom name="geom_cspm23_adaptor_beta" type="mesh" mesh="cspm23_adaptor" rgba="0.8 0 0 1" contype="0" conaffinity="0"/>
+              <geom name="x_cspm23_adaptor_beta" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+              <geom name="y_cspm23_adaptor_beta" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+              <geom name="z_cspm23_adaptor_beta" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+              <body name="paralle_long_link_beta" pos="0 0 0.009"
+                    quat="0.707106607039899 0.0004936760326029743 -0.7071066106666457 -0.0004936760326030298">
+                <inertial mass="0.004" pos="-1.12e-3 -41.772e-3 0" diaginertia="3.16e-6 0.017e-6 3.172e-6"/>
+                <joint name="paralle_long_joint_beta" type="hinge" pos="0 0 0" axis="0 0 1"
+                       limited="true" range="-60 60" damping="1"/>
+                <geom name="geom_paralle_long_beta" type="mesh" mesh="paralle_long" rgba="1 1 1 1" contype="0" conaffinity="0"/>
+                <geom name="x_paralle_long_beta" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+                <geom name="y_paralle_long_beta" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+                <geom name="z_paralle_long_beta" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+                <site name="site_parallel_long_connect_beta" pos="0 -0.085 0" size="0.001" rgba="1 0.6 1 0.4"/>
+                <site name="site_parallel_long_connect_2_beta" pos="0 -0.040 0" size="0.002" rgba="1 0.6 0 0.4"/>
+              </body>
+            </body>
+          </body>
+        </body>
+
+        <!-- Chain 4 -->
+        <body name="body_4_1_beta" pos="-0.047 0 0.0305" quat="0.7071067811865462 0.7071067811865488 0.0 0.0">
+          <inertial mass="0.007" pos="0.005907 0 0.014178"
+                    fullinertia="1.042e-6 1.101e-6 0.225e-6 0 -0.294e-6 0"/>
+          <joint name="joint_4_1_beta" type="hinge" pos="0 0 0" axis="-1 0 0"
+                 limited="true" range="-33 213" damping="100" frictionloss="0.05"/>
+          <geom name="geom_4_1_beta" type="mesh" mesh="mesh_4_1" friction="10 0 0" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+          <geom name="x_4_1_beta" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+          <geom name="y_4_1_beta" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+          <geom name="z_4_1_beta" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+          <body name="body_4_2_beta" pos="0.0116672618895781 0 0.0353370093578838"
+                quat="0.8085158559973775 -0.4470520117325276 0.3348982329478083 0.18517500634579018">
+            <inertial mass="0.021" pos="0.013361 0 42.171e-3"
+                      fullinertia="8.646e-6 10.369e-6 2.697e-6 0 -3.173e-6 0"/>
+            <joint name="joint_4_2_beta" type="hinge" pos="0 0 0" axis="1 0 0"
+                   limited="true" range="-60 60" damping="1"/>
+            <geom name="geom_4_2_beta" type="mesh" mesh="mesh_4_2" rgba="1 1 0 1" contype="0" conaffinity="0"/>
+            <geom name="x_4_2_beta" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+            <geom name="y_4_2_beta" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+            <geom name="z_4_2_beta" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+            <!-- CSPM14 adaptor + paralle_short + fingertip -->
+            <body name="cspm14_adaptor_beta" pos="0.016605179614597 0 0.0627554939638426"
+                  quat="0.9207201443783664 0.07634007027212154 -0.2295613147753419 -0.3061832983122107">
+              <inertial mass="0.002" pos="0 -0.088e-3 4.631e-3" fullinertia="0.104e-6 0.103e-6 0.033e-6 0 0 0.001e-6"/>
+              <joint name="cspm14_adaptor_joint_beta" type="hinge" pos="0 0 0" axis="0 0 1"
+                     limited="true" range="-120 120" damping="10"/>
+              <geom name="geom_cspm14_adaptor_beta" type="mesh" mesh="cspm14_adaptor" rgba="1 0 0 1" contype="0" conaffinity="0"/>
+              <geom name="x_cspm14_adaptor_beta" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+              <geom name="y_cspm14_adaptor_beta" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+              <geom name="z_cspm14_adaptor_beta" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+              <body name="paralle_short_link_beta" pos="0 -0.000128452409223868 0.01421"
+                    quat="0.7071006257529511 -0.0029504338299677357 0.7071006257529511 -0.0029504338299677357">
+                <inertial mass="0.012" pos="0.085e-3 34.705e-3 0" fullinertia="3.562e-6 0.328e-6 3.581e-6 0.014e-6 0 0"/>
+                <joint name="paralle_short_joint_beta" type="hinge" pos="0 0 0" axis="0 0 1"
+                       limited="true" range="-60 60" damping="1"/>
+                <geom name="geom_paralle_short_beta" type="mesh" mesh="paralle_short" rgba="0.5 0.3 0.8 1" contype="0" conaffinity="0"/>
+                <geom name="x_paralle_short_beta" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+                <geom name="y_paralle_short_beta" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+                <geom name="z_paralle_short_beta" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+                <site name="site_parallel_short_connect_beta" pos="0 0.034 0" size="0.001" rgba="1 1 0 0.6"/>
+                <site name="site_parallel_short_connect_2_beta" pos="0.045 0.034 0" size="0.002" rgba="0.2 0.6 0 1"/>
+                <!-- Fingertip module -->
+                <body name="hhtac_base_beta" pos="0 0.054 0" quat="1 0 0 0">
+                  <inertial mass="0.033" pos="0.028e-3 24.598e-3 0" diaginertia="6.926e-6 6.598e-6 6.946e-6"/>
+                  <geom name="geom_sensor_beta" type="mesh" mesh="hhtac_base" rgba="0.6 1 1 1" contype="0" conaffinity="0"/>
+                  <geom name="x_sensor_beta" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+                  <geom name="y_sensor_beta" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+                  <geom name="z_sensor_beta" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+                  <body name="hhtac_contact_beta" pos="0 42.5e-3 0" quat="1 0 0 0">
+                    <inertial mass="0.013" pos="0 10.164e-3 0" diaginertia="1.157e-6 1.482e-6 1.157e-6"/>
+                    <geom name="hhtac_contact_beta" type="mesh" mesh="hhtac_contact" contype="0" conaffinity="0"
+                          friction="1.5 0.1 0.005" solimp="0.95 1 0.001" solref="-0.0001 0.99" margin="0.003"
+                          rgba="1 1 1 1"/>
+                  </body>
+                </body>
+              </body>
+            </body>
+            <site name="site_4_connect_beta" pos="0.03033 0 0.03694" size="0.001" rgba="1 1 1 1"/>
+          </body>
+        </body>
+
+      </body>
+    </body>
+
+    <body name="figer_gamma" pos="0.0 0.1057417 0.0" euler="0 0 -180">
+      <body name="body_platform_gamma" pos="0.066699 -0.0002 -0.00038509"
+            quat="0.6889820653006324 0.15906563768307502 0.15906622196486023 0.6889845960777189">
+
+        <geom name="geom_platform_gamma" type="mesh" mesh="base1" rgba="0.5 0.5 0.5 1" contype="0" conaffinity="0"/>
+
+        <!-- Chain 1 -->
+        <body name="body_1_1_gamma" pos="0.047 0 0.0305" quat="0.7071067811865462 0.7071067811865488 0.0 0.0">
+          <inertial mass="0.007" pos="-0.005907 0 0.014178"
+                    fullinertia="1.042e-6 1.101e-6 0.225e-6 0 0.294e-6 0"/>
+          <joint name="joint_1_1_gamma" type="hinge" pos="0 0 0" axis="-1 0 0"
+                 limited="true" range="-33 213" damping="100" frictionloss="0.05"/>
+          <geom name="geom_1_1_gamma" type="mesh" mesh="mesh_1_1" friction="10 0 0"
+                rgba="0 0 0.6 1" contype="0" conaffinity="0"/>
+          <geom name="x_1_1_gamma" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+          <geom name="y_1_1_gamma" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+          <geom name="z_1_1_gamma" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+          <body name="body_1_2_gamma" pos="-0.0116672618895781 0 0.0353370093578838"
+                quat="0.8085158559973773 -0.4470520117325275 -0.33489823294780874 -0.18517500634579043">
+            <inertial mass="0.008" pos="-0.008956 -8e-6 0.019449"
+                      fullinertia="0.83e-6 1.693e-6 1e-6 0 0.748e-6 0"/>
+            <joint name="joint_1_2_gamma" type="hinge" pos="0 0 0" axis="1 0 0"
+                   limited="true" range="-60 60" damping="1"/>
+            <geom name="geom_1_2_gamma" type="mesh" mesh="mesh_1_2" rgba="0 1 0 1" contype="0" conaffinity="0"/>
+            <geom name="x_1_2_gamma" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+            <geom name="y_1_2_gamma" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+            <geom name="z_1_2_gamma" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+            <site name="site_1_connect_gamma" pos="-0.03045 0 0.03672" size="0.001" rgba="1 0 0 1"/>
+          </body>
+        </body>
+
+        <!-- Chain 2 -->
+        <body name="body_2_1_gamma" pos="0.01 0 0.0305">
+          <inertial mass="0.005" pos="0.000519 0 0.01114"
+                    fullinertia="0.479e-6 0.574e-6 0.179e-6 0 -0.138e-6 0"/>
+          <joint name="joint_2_1_gamma" type="hinge" pos="0 0 0" axis="1 0 0"
+                 limited="true" range="-120 120" damping="100" frictionloss="0.05"/>
+          <geom name="geom_2_1_gamma" type="mesh" mesh="mesh_2_1" friction="10 0 0"
+                rgba="0 0.8 0.4 1" contype="0" conaffinity="0"/>
+          <geom name="x_2_1_gamma" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+          <geom name="y_2_1_gamma" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+          <geom name="z_2_1_gamma" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+          <body name="body_2_2_gamma" pos="0.013617 0 0.023617"
+                quat="0.8878198148494888 0.10586792529977154 0.36774869771815494 0.2555950979184514">
+            <inertial mass="0.003" pos="3e-6 9.968e-3 -6.271e-3"
+                      fullinertia="0.448e-6 0.321e-6 0.177e-6 0 0 0.153e-6"/>
+            <joint name="joint_2_2_gamma" type="hinge" pos="0 0 0" axis="0 0 1"
+                   limited="true" range="-60 60" damping="1"/>
+            <geom name="x_2_2_gamma" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+            <geom name="y_2_2_gamma" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+            <geom name="z_2_2_gamma" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+            <geom name="geom_2_2_gamma" type="mesh" mesh="mesh_2_2" rgba="1 1 0 1" contype="0" conaffinity="0"/>
+            <site name="site_2_connect_gamma" pos="0 0.01941147952 -0.02307689935" size="0.001" rgba="1 0 0 0.2"/>
+          </body>
+        </body>
+
+        <!-- Chain 3 -->
+        <body name="body_3_1_gamma" pos="-0.010 0 0.0305">
+          <inertial mass="0.005" pos="-0.000256 0 0.01107"
+                    fullinertia="0.448e-6 0.574e-6 0.172e-6 0 0.131e-6 0"/>
+          <joint name="joint_3_1_gamma" type="hinge" pos="0 0 0" axis="1 0 0"
+                 limited="true" range="-120 120" damping="100" frictionloss="0.05"/>
+          <geom name="geom_3_1_gamma" type="mesh" mesh="mesh_3_1" friction="10 0 0"
+                rgba="0 0.8 0.8 1" contype="0" conaffinity="0"/>
+          <geom name="x_3_1_gamma" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+          <geom name="y_3_1_gamma" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+          <geom name="z_3_1_gamma" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+          <body name="body_3_2_gamma" pos="-0.0136170093578839 0 0.0236170093578839"
+                quat="0.8878205535117507 0.10587030883141682 -0.367747314218155 -0.255593535433435">
+            <inertial mass="0.003" pos="0 10.069e-3 -7.195e-3"
+                      fullinertia="0.526e-6 0.34e-6 0.247e-6 0 0 0.236e-6"/>
+            <joint name="joint_3_2_gamma" type="hinge" pos="0 0 0" axis="0 0 1"
+                   limited="true" range="-60 60" damping="1"/>
+            <geom name="x_3_2_gamma" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+            <geom name="y_3_2_gamma" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+            <geom name="z_3_2_gamma" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+            <geom name="geom_3_2_gamma" type="mesh" mesh="mesh_3_2" friction="0.5 0 0" rgba="0.4 0.8 0.4 1" contype="0" conaffinity="0"/>
+            <site name="site_3_connect_gamma" pos="0 0.0194108877 -0.02307493063" size="0.001" rgba="1 1 1 0.4"/>
+            <!-- CSPM23 adaptor + paralle_long -->
+            <body name="cspm23_adaptor_gamma" pos="0 0.02206 -0.021667"
+                  quat="0.7664016139459412 -0.46050129008309315 0.2306580916677669 0.38388015411199305">
+              <inertial mass="0.003" pos="0 0 7.02e-3" diaginertia="0.082e-6 0.08e-6 0.062e-6"/>
+              <joint name="cspm23_adaptor_joint_gamma" type="hinge" pos="0 0 0" axis="0 0 1"
+                     limited="true" range="-120 120" damping="10"/>
+              <geom name="geom_cspm23_adaptor_gamma" type="mesh" mesh="cspm23_adaptor" rgba="0.8 0 0 1" contype="0" conaffinity="0"/>
+              <geom name="x_cspm23_adaptor_gamma" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+              <geom name="y_cspm23_adaptor_gamma" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+              <geom name="z_cspm23_adaptor_gamma" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+              <body name="paralle_long_link_gamma" pos="0 0 0.009"
+                    quat="0.707106607039899 0.0004936760326029743 -0.7071066106666457 -0.0004936760326030298">
+                <inertial mass="0.004" pos="-1.12e-3 -41.772e-3 0" diaginertia="3.16e-6 0.017e-6 3.172e-6"/>
+                <joint name="paralle_long_joint_gamma" type="hinge" pos="0 0 0" axis="0 0 1"
+                       limited="true" range="-60 60" damping="1"/>
+                <geom name="geom_paralle_long_gamma" type="mesh" mesh="paralle_long" rgba="1 1 1 1" contype="0" conaffinity="0"/>
+                <geom name="x_paralle_long_gamma" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+                <geom name="y_paralle_long_gamma" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+                <geom name="z_paralle_long_gamma" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+                <site name="site_parallel_long_connect_gamma" pos="0 -0.085 0" size="0.001" rgba="1 0.6 1 0.4"/>
+                <site name="site_parallel_long_connect_2_gamma" pos="0 -0.040 0" size="0.002" rgba="1 0.6 0 0.4"/>
+              </body>
+            </body>
+          </body>
+        </body>
+
+        <!-- Chain 4 -->
+        <body name="body_4_1_gamma" pos="-0.047 0 0.0305" quat="0.7071067811865462 0.7071067811865488 0.0 0.0">
+          <inertial mass="0.007" pos="0.005907 0 0.014178"
+                    fullinertia="1.042e-6 1.101e-6 0.225e-6 0 -0.294e-6 0"/>
+          <joint name="joint_4_1_gamma" type="hinge" pos="0 0 0" axis="-1 0 0"
+                 limited="true" range="-33 213" damping="100" frictionloss="0.05"/>
+          <geom name="geom_4_1_gamma" type="mesh" mesh="mesh_4_1" friction="10 0 0" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+          <geom name="x_4_1_gamma" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+          <geom name="y_4_1_gamma" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+          <geom name="z_4_1_gamma" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+          <body name="body_4_2_gamma" pos="0.0116672618895781 0 0.0353370093578838"
+                quat="0.8085158559973775 -0.4470520117325276 0.3348982329478083 0.18517500634579018">
+            <inertial mass="0.021" pos="0.013361 0 42.171e-3"
+                      fullinertia="8.646e-6 10.369e-6 2.697e-6 0 -3.173e-6 0"/>
+            <joint name="joint_4_2_gamma" type="hinge" pos="0 0 0" axis="1 0 0"
+                   limited="true" range="-60 60" damping="1"/>
+            <geom name="geom_4_2_gamma" type="mesh" mesh="mesh_4_2" rgba="1 1 0 1" contype="0" conaffinity="0"/>
+            <geom name="x_4_2_gamma" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+            <geom name="y_4_2_gamma" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+            <geom name="z_4_2_gamma" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+            <!-- CSPM14 adaptor + paralle_short + fingertip -->
+            <body name="cspm14_adaptor_gamma" pos="0.016605179614597 0 0.0627554939638426"
+                  quat="0.9207201443783664 0.07634007027212154 -0.2295613147753419 -0.3061832983122107">
+              <inertial mass="0.002" pos="0 -0.088e-3 4.631e-3" fullinertia="0.104e-6 0.103e-6 0.033e-6 0 0 0.001e-6"/>
+              <joint name="cspm14_adaptor_joint_gamma" type="hinge" pos="0 0 0" axis="0 0 1"
+                     limited="true" range="-120 120" damping="10"/>
+              <geom name="geom_cspm14_adaptor_gamma" type="mesh" mesh="cspm14_adaptor" rgba="1 0 0 1" contype="0" conaffinity="0"/>
+              <geom name="x_cspm14_adaptor_gamma" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+              <geom name="y_cspm14_adaptor_gamma" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+              <geom name="z_cspm14_adaptor_gamma" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+              <body name="paralle_short_link_gamma" pos="0 -0.000128452409223868 0.01421"
+                    quat="0.7071006257529511 -0.0029504338299677357 0.7071006257529511 -0.0029504338299677357">
+                <inertial mass="0.012" pos="0.085e-3 34.705e-3 0" fullinertia="3.562e-6 0.328e-6 3.581e-6 0.014e-6 0 0"/>
+                <joint name="paralle_short_joint_gamma" type="hinge" pos="0 0 0" axis="0 0 1"
+                       limited="true" range="-60 60" damping="1"/>
+                <geom name="geom_paralle_short_gamma" type="mesh" mesh="paralle_short" rgba="0.5 0.3 0.8 1" contype="0" conaffinity="0"/>
+                <geom name="x_paralle_short_gamma" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+                <geom name="y_paralle_short_gamma" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+                <geom name="z_paralle_short_gamma" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+                <site name="site_parallel_short_connect_gamma" pos="0 0.034 0" size="0.001" rgba="1 1 0 0.6"/>
+                <site name="site_parallel_short_connect_2_gamma" pos="0.045 0.034 0" size="0.002" rgba="0.2 0.6 0 1"/>
+                <!-- Fingertip module -->
+                <body name="hhtac_base_gamma" pos="0 0.054 0" quat="1 0 0 0">
+                  <inertial mass="0.033" pos="0.028e-3 24.598e-3 0" diaginertia="6.926e-6 6.598e-6 6.946e-6"/>
+                  <geom name="geom_sensor_gamma" type="mesh" mesh="hhtac_base" rgba="0.6 1 1 1" contype="0" conaffinity="0"/>
+                  <geom name="x_sensor_gamma" type="box" pos="0.006 0 0" size="0.006 0.0005 0.0005 " rgba="1 0 0 1" contype="0" conaffinity="0"/>
+                  <geom name="y_sensor_gamma" type="box" pos="0 0.006 0" size="0.0005 0.006 0.0005 " rgba="0 1 0 1" contype="0" conaffinity="0"/>
+                  <geom name="z_sensor_gamma" type="box" pos="0 0 0.006" size="0.0005 0.0005 0.006" rgba="0 0 1 1" contype="0" conaffinity="0"/>
+                  <body name="hhtac_contact_gamma" pos="0 42.5e-3 0" quat="1 0 0 0">
+                    <inertial mass="0.013" pos="0 10.164e-3 0" diaginertia="1.157e-6 1.482e-6 1.157e-6"/>
+                    <geom name="hhtac_contact_gamma" type="mesh" mesh="hhtac_contact" contype="0" conaffinity="0"
+                          friction="1.5 0.1 0.005" solimp="0.95 1 0.001" solref="-0.0001 0.99" margin="0.003"
+                          rgba="1 1 1 1"/>
+                  </body>
+                </body>
+              </body>
+            </body>
+            <site name="site_4_connect_gamma" pos="0.03033 0 0.03694" size="0.001" rgba="1 1 1 1"/>
+          </body>
+        </body>
+
+      </body>
+    </body>
+    </body>
+  </worldbody>
+
+  <equality>
+    <!-- alpha CSPM inner -->
+    <connect site1="site_1_connect_alpha" site2="site_4_connect_alpha" solref="0.00001 1" solimp="0.95 0.999 0.0001"/>
+    <!-- alpha CSPM outer -->
+    <connect site1="site_2_connect_alpha" site2="site_3_connect_alpha" solref="0.00001 1" solimp="0.95 0.999 0.0001"/>
+    <!-- alpha distal pivot -->
+    <connect site1="site_parallel_short_connect_alpha" site2="site_parallel_long_connect_alpha" solref="0.0005 1" solimp="0.99 0.999 0.001"/>
+    <!-- alpha distal axis -->
+    <connect site1="site_parallel_short_connect_2_alpha" site2="site_parallel_long_connect_2_alpha" solref="0.0005 1" solimp="0.99 0.999 0.001"/>
+    <!-- beta CSPM inner -->
+    <connect site1="site_1_connect_beta" site2="site_4_connect_beta" solref="0.00001 1" solimp="0.95 0.999 0.0001"/>
+    <!-- beta CSPM outer -->
+    <connect site1="site_2_connect_beta" site2="site_3_connect_beta" solref="0.00001 1" solimp="0.95 0.999 0.0001"/>
+    <!-- beta distal pivot -->
+    <connect site1="site_parallel_short_connect_beta" site2="site_parallel_long_connect_beta" solref="0.0005 1" solimp="0.99 0.999 0.001"/>
+    <!-- beta distal axis -->
+    <connect site1="site_parallel_short_connect_2_beta" site2="site_parallel_long_connect_2_beta" solref="0.0005 1" solimp="0.99 0.999 0.001"/>
+    <!-- gamma CSPM inner -->
+    <connect site1="site_1_connect_gamma" site2="site_4_connect_gamma" solref="0.00001 1" solimp="0.95 0.999 0.0001"/>
+    <!-- gamma CSPM outer -->
+    <connect site1="site_2_connect_gamma" site2="site_3_connect_gamma" solref="0.00001 1" solimp="0.95 0.999 0.0001"/>
+    <!-- gamma distal pivot -->
+    <connect site1="site_parallel_short_connect_gamma" site2="site_parallel_long_connect_gamma" solref="0.0005 1" solimp="0.99 0.999 0.001"/>
+    <!-- gamma distal axis -->
+    <connect site1="site_parallel_short_connect_2_gamma" site2="site_parallel_long_connect_2_gamma" solref="0.0005 1" solimp="0.99 0.999 0.001"/>
+  </equality>
+
+  <contact>
+    <exclude body1="hand_base" body2="hhtac_contact_alpha"/>
+    <exclude body1="hand_base" body2="body_4_2_alpha"/>
+    <exclude body1="hand_base" body2="hhtac_contact_beta"/>
+    <exclude body1="hand_base" body2="body_4_2_beta"/>
+    <exclude body1="hand_base" body2="hhtac_contact_gamma"/>
+    <exclude body1="hand_base" body2="body_4_2_gamma"/>
+  </contact>
+
+  <tendon>
+    <fixed name="limit_angle_diff_alpha" range="-1.15192 0.331613">
+      <joint joint="joint_4_1_alpha" coef="1"/>
+      <joint joint="joint_1_1_alpha" coef="-1"/>
+    </fixed>
+    <fixed name="limit_angle_diff_beta" range="-1.15192 0.331613">
+      <joint joint="joint_4_1_beta" coef="1"/>
+      <joint joint="joint_1_1_beta" coef="-1"/>
+    </fixed>
+    <fixed name="limit_angle_diff_gamma" range="-1.15192 0.331613">
+      <joint joint="joint_4_1_gamma" coef="1"/>
+      <joint joint="joint_1_1_gamma" coef="-1"/>
+    </fixed>
+  </tendon>
+
+  <actuator>
+    <position name="servo_1_1_alpha" joint="joint_1_1_alpha" kp="40" kv="5" ctrllimited="true" ctrlrange="-0.576 3.72"/>
+    <position name="servo_2_1_alpha" joint="joint_2_1_alpha" kp="40" kv="5" ctrllimited="true" ctrlrange="-2.147 2.147"/>
+    <position name="servo_3_1_alpha" joint="joint_3_1_alpha" kp="40" kv="5" ctrllimited="true" ctrlrange="-2.147 2.147"/>
+    <position name="servo_4_1_alpha" joint="joint_4_1_alpha" kp="40" kv="5" ctrllimited="true" ctrlrange="-0.576 3.72"/>
+    <position name="servo_1_1_beta" joint="joint_1_1_beta" kp="40" kv="5" ctrllimited="true" ctrlrange="-0.576 3.72"/>
+    <position name="servo_2_1_beta" joint="joint_2_1_beta" kp="40" kv="5" ctrllimited="true" ctrlrange="-2.147 2.147"/>
+    <position name="servo_3_1_beta" joint="joint_3_1_beta" kp="40" kv="5" ctrllimited="true" ctrlrange="-2.147 2.147"/>
+    <position name="servo_4_1_beta" joint="joint_4_1_beta" kp="40" kv="5" ctrllimited="true" ctrlrange="-0.576 3.72"/>
+    <position name="servo_1_1_gamma" joint="joint_1_1_gamma" kp="40" kv="5" ctrllimited="true" ctrlrange="-0.576 3.72"/>
+    <position name="servo_2_1_gamma" joint="joint_2_1_gamma" kp="40" kv="5" ctrllimited="true" ctrlrange="-2.147 2.147"/>
+    <position name="servo_3_1_gamma" joint="joint_3_1_gamma" kp="40" kv="5" ctrllimited="true" ctrlrange="-2.147 2.147"/>
+    <position name="servo_4_1_gamma" joint="joint_4_1_gamma" kp="40" kv="5" ctrllimited="true" ctrlrange="-0.576 3.72"/>
+  </actuator>
+
+
+</mujoco>

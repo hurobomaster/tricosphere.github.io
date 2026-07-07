@@ -33,14 +33,6 @@
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
-  <script type="importmap">
-    {
-      "imports": {
-        "three": "./static/vendor/three/three.module.min.js"
-      }
-    }
-  </script>
-  <script type="module" src="./static/js/interactive-demo.js"></script>
 </head>
 <body>
 
@@ -240,44 +232,6 @@
           </video>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== INTERACTIVE MUJOCO DEMO ========== -->
-<section id="interactive-demo" class="section" style="padding-top: 0;">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Interactive MuJoCo Demo</h2>
-        <p class="content">
-          This browser-based demo loads the original MuJoCo MJCF model and runs real-time simulation with actuator-level control.
-        </p>
-      </div>
-    </div>
-
-    <div class="mujoco-demo-card">
-      <div class="mujoco-viewer-wrap">
-        <div id="mujoco-viewer" aria-label="Interactive MuJoCo 3D viewer"></div>
-        <div id="mujoco-loading" class="mujoco-loading">Loading MuJoCo model...</div>
-        <div id="mujoco-error" class="mujoco-error" hidden></div>
-      </div>
-
-      <aside class="mujoco-control-panel" aria-label="MuJoCo actuator controls">
-        <h3 class="title is-5">Actuator Control</h3>
-        <div id="mujoco-actuator-controls"></div>
-
-        <div class="mujoco-button-row">
-          <button id="mujoco-reset" class="button is-small" type="button">Reset</button>
-          <button id="mujoco-play-pause" class="button is-small is-link is-light" type="button">Pause</button>
-        </div>
-
-        <div class="mujoco-status">
-          <div><span>Simulation time:</span> <strong id="mujoco-sim-time">0.000 s</strong></div>
-          <div><span>FPS:</span> <strong id="mujoco-fps">--</strong></div>
-          <div><span>Tip position:</span> <strong id="mujoco-tip">--</strong></div>
-        </div>
-      </aside>
     </div>
   </div>
 </section>
